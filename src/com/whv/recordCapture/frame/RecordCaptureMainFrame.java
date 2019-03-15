@@ -102,7 +102,11 @@ public class RecordCaptureMainFrame extends JFrame implements ActionListener{
         System.exit(0);
     }
     public static void main(String[] args) {
-    	File file = new File("setting.dat");
+    	 String path = System.getProperty("java.class.path");
+         int firstIndex = path.lastIndexOf(System.getProperty("path.separator")) + 1;
+         int lastIndex = path.lastIndexOf(File.separator) + 1;
+         path = path.substring(firstIndex, lastIndex);
+         File file = new File(path+"setting.dat");
         if(file.exists()) {
         	try {
 				settings = (Settings) SerializeUtil.load(new FileInputStream(file));

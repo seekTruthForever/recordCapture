@@ -154,7 +154,11 @@ public class SettingsFrame extends JFrame implements ActionListener {
                 settings.setCaptureDir(captureDir_textfield.getText());
                 settings.setRecordDir(recordDir_textfield.getText());
                 settings.setFlvDir(flvDir_textfield.getText());
-                File file = new File("setting.dat");
+                String path = System.getProperty("java.class.path");
+                int firstIndex = path.lastIndexOf(System.getProperty("path.separator")) + 1;
+                int lastIndex = path.lastIndexOf(File.separator) + 1;
+                path = path.substring(firstIndex, lastIndex);
+                File file = new File(path+"setting.dat");
                 try {
 					SerializeUtil.store(settings, new FileOutputStream(file));
 				} catch (FileNotFoundException e) {

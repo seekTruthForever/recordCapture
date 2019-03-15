@@ -105,11 +105,9 @@ public class VideoConvert {
 		if (!checkfile(resourcePath)) {
 			System.err.println(resourcePath + " is not file");
 		}
-		// ÎÄ¼þÃüÃû
-		//Calendar c = Calendar.getInstance();
-		//String savename = String.valueOf(c.getTimeInMillis()) + Math.round(Math.random() * 100000);
+		String driversPath = VideoConvert.class.getResource("/drivers/ffmpeg.exe").getPath();
         String comm = "";
-        comm = comm + System.getProperty("user.dir")+"\\drivers\\ffmpeg.exe";
+        comm = comm + driversPath;
         comm = comm + " -i ";
         comm = comm + resourcePath.replaceAll(" ", "\" \"");
         comm = comm + " -ab";
