@@ -109,9 +109,6 @@ public class VideoConvert {
          int firstIndex = path.lastIndexOf(System.getProperty("path.separator")) + 1;
          int lastIndex = path.lastIndexOf(File.separator) + 1;
          path = path.substring(firstIndex, lastIndex);
-		// ÎÄ¼şÃüÃû
-		//Calendar c = Calendar.getInstance();
-		//String savename = String.valueOf(c.getTimeInMillis()) + Math.round(Math.random() * 100000);
         String comm = "";
         comm = comm + path+"drivers"+File.separator+"ffmpeg.exe";
         comm = comm + " -i ";
