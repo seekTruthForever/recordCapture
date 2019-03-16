@@ -59,7 +59,7 @@ public class ScreenRecorder {
 	private ScheduledThreadPoolExecutor screenTimer;
 	private ScheduledThreadPoolExecutor mouseTimer;
 	private BufferedImage cursorImg;
-	private Point cursorOffset = new Point(-8, -5);
+	private Point cursorOffset = new Point(Constant.RECTX*(-1),Constant.RECTY*(-1));
 	private final Object sync = new Object();
 	//private Thread audioRunner;
 	public static String mediaName;
