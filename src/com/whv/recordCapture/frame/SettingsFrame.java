@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -154,10 +155,16 @@ public class SettingsFrame extends JFrame implements ActionListener {
                 settings.setCaptureDir(captureDir_textfield.getText());
                 settings.setRecordDir(recordDir_textfield.getText());
                 settings.setFlvDir(flvDir_textfield.getText());
+//                String path = SettingsFrame.class.getProtectionDomain().getCodeSource().getLocation().getPath();
                 String path = System.getProperty("java.class.path");
                 int firstIndex = path.lastIndexOf(System.getProperty("path.separator")) + 1;
                 int lastIndex = path.lastIndexOf(File.separator) + 1;
                 path = path.substring(firstIndex, lastIndex);
+                try {
+        			path = java.net.URLDecoder.decode(path, "UTF-8");
+        		} catch (UnsupportedEncodingException e1) {
+        			e1.printStackTrace();
+        		}
                 File file = new File(path+"setting.dat");
                 try {
 					SerializeUtil.store(settings, new FileOutputStream(file));

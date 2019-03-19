@@ -1,7 +1,9 @@
 package com.whv.recordCapture.record.media.convert;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
+import com.whv.recordCapture.frame.SettingsFrame;
 import com.whv.recordCapture.record.constant.Constant;
 
 
@@ -105,10 +107,22 @@ public class VideoConvert {
 		if (!checkfile(resourcePath)) {
 			System.err.println(resourcePath + " is not file");
 		}
+//		 String path = SettingsFrame.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		 String path = System.getProperty("java.class.path");
          int firstIndex = path.lastIndexOf(System.getProperty("path.separator")) + 1;
          int lastIndex = path.lastIndexOf(File.separator) + 1;
          path = path.substring(firstIndex, lastIndex);
+         try {
+ 			path = java.net.URLDecoder.decode(path, "UTF-8");
+ 		} catch (UnsupportedEncodingException e1) {
+ 			e1.printStackTrace();
+ 		}
+         if(path.contains("/")) {
+        	 path = path.replaceAll("/", "\\"+File.separator);
+         }
+         if(path.contains("\\")) {
+        	 path = path.replaceAll("\\\\", "\\"+File.separator);
+         }
         String comm = "";
         comm = comm + path+"drivers"+File.separator+"ffmpeg.exe";
         comm = comm + " -i ";

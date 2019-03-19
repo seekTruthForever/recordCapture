@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -102,10 +103,16 @@ public class RecordCaptureMainFrame extends JFrame implements ActionListener{
         System.exit(0);
     }
     public static void main(String[] args) {
+//    	 String path = RecordCaptureMainFrame.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     	 String path = System.getProperty("java.class.path");
          int firstIndex = path.lastIndexOf(System.getProperty("path.separator")) + 1;
          int lastIndex = path.lastIndexOf(File.separator) + 1;
          path = path.substring(firstIndex, lastIndex);
+    	 try {
+			path = java.net.URLDecoder.decode(path, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
          File file = new File(path+"setting.dat");
         if(file.exists()) {
         	try {
